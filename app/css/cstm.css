@@ -1,0 +1,78 @@
+/* Form input type date turns the icon white */
+input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Form input type number set appearance to none */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Pagination previous and next */
+.dark-mode .page-item.disabled .page-link,
+.dark-mode .page-item.disabled a {
+  color: #ffffff;
+}
+
+/* Styling when the checkbox is selected but not checked */
+.custom-label {
+  position: relative;
+}
+
+.custom-label::before {
+  position: relative;
+  padding: 7.55px !important;
+  border-color: #ffffff !important;
+}
+
+.custom-label::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0.22px, 0.22px);
+}
+
+.content-header {
+  padding: 25px 0.5rem 15px !important;
+}
+
+.page-link {
+  color: #ffffff !important;
+}
+
+.dark-mode .table thead th {
+  font-weight: normal;
+  background: rgb(108, 117, 125);
+  border-color: rgb(135, 140, 155);
+  border-top: unset;
+  border-bottom: unset;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: normal !important;
+}
+
+.layout-footer-fixed .wrapper .content-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.cstm_crsr {
+  cursor: not-allowed;
+}
+
+.col-sm-12 .col-md-5 {
+  display: flex;
+  align-items: center;
+  margin: 9px 0 0;
+}
+
+.col-sm-12 .col-md-7 {
+  margin: 7px 0 0;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+  padding-top: unset;
+}
