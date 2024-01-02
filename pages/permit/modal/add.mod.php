@@ -40,7 +40,7 @@
               </div>
               <div class="form-group">
                 <label>Amount:</label>
-                <input name="txt_amount" class="form-control input-sm" type="number" placeholder="Amount" />
+                <input name="txt_amount" class="form-control input-sm" type="number" value="0.00" />
               </div>
             </div>
           </div>

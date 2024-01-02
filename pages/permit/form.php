@@ -23,8 +23,8 @@ if (!isset($_SESSION['role'])) {
 
   <body>
     <?php include "../connection.php" ?>
-    <div style="margin: 55px 100px 0;" class="clearance_container">
-      <div class="clearance_header"
+    <div style="margin: 55px 100px 0;" class="permit_container">
+      <div class="permit_header"
         style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%; height: 100%;">
         <div class="left_logo">
           <img style="width: 150px; height: 150px;" src="../../assets/img/city-logo.png" alt="Logo">

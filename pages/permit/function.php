@@ -43,30 +43,55 @@ if (isset($_POST['btn_add'])) {
 }
 
 if (isset($_POST['btn_req'])) {
-  $chkblot = mysqli_query($con, "SELECT * FROM tblresident WHERE '" . $_SESSION['userid'] . "' not in (SELECT complainant FROM tblblotter)");
-  $num_row = mysqli_num_rows($chkblot);
-  if ($num_row > 0) {
-    $chk = mysqli_query($con, "SELECT * FROM tblresident WHERE id = '" . $_SESSION['userid'] . "' ");
-    while ($row = mysqli_fetch_array($chk)) {
+  $userId = $_SESSION['userid'];
 
+  // Check if the user is not a complainee in any unsolved blotter
+  $chkblotQuery = "SELECT * FROM tblblotter WHERE sStatus = 'Unsolved' AND personToComplain = ?";
+  $chkblotStmt = mysqli_prepare($con, $chkblotQuery);
+  mysqli_stmt_bind_param($chkblotStmt, "s", $userId);
+  mysqli_stmt_execute($chkblotStmt);
+  $chkblotResult = mysqli_stmt_get_result($chkblotStmt);
+
+  if (mysqli_num_rows($chkblotResult) == 0) {
+    // User is not a complainee in any unsolved blotter, check length of stay
+    $chkQuery = "SELECT * FROM tblresident WHERE id = ?";
+    $chkStmt = mysqli_prepare($con, $chkQuery);
+    mysqli_stmt_bind_param($chkStmt, "s", $userId);
+    mysqli_stmt_execute($chkStmt);
+    $chkResult = mysqli_stmt_get_result($chkStmt);
+
+    while ($row = mysqli_fetch_array($chkResult)) {
       if ($row['lengthofstay'] < 6) {
         $_SESSION['lengthofstay'] = 1;
         header("location: " . $_SERVER['REQUEST_URI']);
       } else {
+        // User can request permit
         $txt_purpose = $_POST['txt_purpose'];
         $date = date('Y-m-d H:i:s');
-        $reqquery = mysqli_query($con, "INSERT INTO tblpermit (permitNo, residentid, findings, purpose, orNo, samount, dateRecorded, recordedBy, status) 
-                    VALUES ('','" . $_SESSION['userid'] . "','','$txt_purpose','','','$date','" . $_SESSION['fname'] . ' ' . $_SESSION['lname'] . "','new') ") or die('Error: ' . mysqli_error($con));
+        $recordedBy = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
 
-        if ($reqquery == true) {
+        $reqQuery = "INSERT INTO tblpermit (permitNo, residentid, findings, purpose, orNo, samount, dateRecorded, recordedBy, status) 
+                           VALUES ('', ?, '', ?, '', '', ?, ?, 'new')";
+        $reqStmt = mysqli_prepare($con, $reqQuery);
+        mysqli_stmt_bind_param($reqStmt, "isss", $userId, $txt_purpose, $date, $recordedBy);
+        mysqli_stmt_execute($reqStmt);
+
+        if (mysqli_stmt_affected_rows($reqStmt) > 0) {
           header("location: " . $_SERVER['REQUEST_URI']);
+        } else {
+          echo "Error: " . mysqli_error($con);
         }
       }
     }
   } else {
+    // User is a complainant in an unsolved blotter, set blotter session variable
     $_SESSION['blotter'] = 1;
     header("location: " . $_SERVER['REQUEST_URI']);
   }
+  // Close prepared statements
+  mysqli_stmt_close($chkblotStmt);
+  mysqli_stmt_close($chkStmt);
+  mysqli_stmt_close($reqStmt);
 }
 
 if (isset($_POST['btn_approve'])) {
@@ -76,7 +101,7 @@ if (isset($_POST['btn_approve'])) {
   $txt_ornum = $_POST['txt_ornum'];
   $txt_amount = $_POST['txt_amount'];
 
-  $approve_query = mysqli_query($con, "UPDATE tblpermit SET permitNo= '" . $txt_cnum . "', findings = '" . $txt_findings . "', orNo = '" . $txt_ornum . "', samount = '" . $txt_amount . "', status='approved' WHERE id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
+  $approve_query = mysqli_query($con, "UPDATE tblpermit SET permitNo = '" . $txt_cnum . "', findings = '" . $txt_findings . "', orNo = '" . $txt_ornum . "', samount = '" . $txt_amount . "', status='approved' WHERE id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
 
   if ($approve_query == true) {
     header("location: " . $_SERVER['REQUEST_URI']);

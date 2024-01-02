@@ -3,7 +3,7 @@ include "../../include/profile.inc.php";
 
 echo '
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-dark elevation-3" style="border: none !important">
+<nav class="main-header navbar navbar-expand navbar-dark elevation-2" style="border: none !important">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">

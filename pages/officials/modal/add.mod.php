@@ -13,14 +13,14 @@
                 <label class="control-label">Position</label>
                 <select name="ddl_pos" class="form-control select2" data-minimum-results-for-search="Infinity">
                   <option selected disabled>Please select your position</option>
-                  <option value="captain">Barangay Captain</option>
-                  <option value="kagawad(ordinance)">Barangay Kagawad(Ordinance)</option>
-                  <option value="kagawad(public safety)">Barangay Kagawad(Public Safety)</option>
-                  <option value="kagawad(tourism)">Barangay Kagawad(Tourism)</option>
-                  <option value="kagawad(budget & finance)">Barangay Kagawad(Budget & Finance)</option>
-                  <option value="kagawad(agriculture)">Barangay Kagawad(Agriculture)</option>
-                  <option value="kagawad(education)">Barangay Kagawad(Education)</option>
-                  <option value="kagawad(infrastracture)">Barangay Kagawad(Infrastracture)</option>
+                  <option value="barangay captain">Barangay Captain</option>
+                  <option value="kagawad (ordinance)">Barangay Kagawad (Ordinance)</option>
+                  <option value="kagawad (public safety)">Barangay Kagawad (Public Safety)</option>
+                  <option value="kagawad (tourism)">Barangay Kagawad (Tourism)</option>
+                  <option value="kagawad (budget & finance)">Barangay Kagawad (Budget & Finance)</option>
+                  <option value="kagawad (agriculture)">Barangay Kagawad (Agriculture)</option>
+                  <option value="kagawad (education)">Barangay Kagawad (Education)</option>
+                  <option value="kagawad (infrastracture)">Barangay Kagawad (Infrastracture)</option>
                   <option value="sk chairman">SK Chairman</option>
                   <option value="secretary">Barangay Secretary</option>
                   <option value="treasurer">Barangay Treasurer</option>

@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
   if (!isset($_SESSION['role'])) {
     header("Location: ../../login.php");
     exit();
-  } elseif (($_SESSION['role'] !== "Administrator") || ($_SESSION['role'] === "Resident") || ($_SESSION['role'] === "Staff") || ($_SESSION['role'] === "captain")) {
+  } elseif (($_SESSION['role'] !== "administrator") || ($_SESSION['role'] === "resident") || ($_SESSION['role'] === "staff") || ($_SESSION['role'] === "captain")) {
     header("Location: ../../login.php");
     exit();
   } else {

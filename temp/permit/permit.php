@@ -14,7 +14,7 @@ if (!isset($_SESSION['role'])) {
 
       <!-- Preloader -->
       <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="../../assets/img/brgy-logo.png" alt="AdminLTELogo" height="200" width="200">
+        <img class="animation__wobble" src="../../assets/img/brgy-logo.png" alt="Brgy Logo" height="200" width="200">
       </div>
 
       <!-- Navbar -->
@@ -51,7 +51,7 @@ if (!isset($_SESSION['role'])) {
           <div class="container-fluid">
             <div class="row">
               <?php
-              if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff") && (isset($_SESSION['role']) && $_SESSION['role'] != "captain") && (isset($_SESSION['role']) && $_SESSION['role'] != "resident")) {
+              if ((isset($_SESSION['role']) && $_SESSION['role'] === "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] === "staff") || (!isset($_SESSION['role']) && $_SESSION['role'] !== "captain") && (!isset($_SESSION['role']) && $_SESSION['role'] !== "resident")) {
                 ?>
                 <div class="col-12 col-sm-12">
                   <div class="card card-primary card-outline">
@@ -97,20 +97,20 @@ if (!isset($_SESSION['role'])) {
                               <thead>
                                 <tr>
                                   <th class="align-middle user-select-none" style="width: 0px !important">
-                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 31px">
+                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 30.75px">
                                       <input class="cbxMain custom-control-input" name="chk_delete[]" type="checkbox"
                                         id="cstm-chckbx-0" onchange="checkMain(this)">
-                                      <label for="cstm-chckbx-0" class="custom-control-label"></label>
+                                      <label for="cstm-chckbx-0" class="custom-control-label custom-label"></label>
                                     </div>
                                   </th>
-                                  <th class="align-middle">Resident Name</th>
-                                  <th class="align-middle">Purpose</th>
-                                  <th class="align-middle">Option</th>
+                                  <th class="align-middle user-select-none">Resident Name</th>
+                                  <th class="align-middle user-select-none">Purpose</th>
+                                  <th class="align-middle user-select-none" width="253.95px">Option</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'New'") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'new'") or die('Error: ' . mysqli_error($con));
                                 while ($row = mysqli_fetch_array($squery)) {
                                   $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                   echo '
@@ -121,11 +121,15 @@ if (!isset($_SESSION['role'])) {
                                           <label for="' . $checkboxId . '" class="custom-control-label"></label>
                                         </div>
                                       </td>
-                                      <td class="align-middle">' . $row['residentname'] . '</td>
-                                      <td class="align-middle">' . $row['purpose'] . '</td>
-                                      <td class="align-middle">
-                                          <button type="button" class="btn btn-success mr-1" data-target="#approveModal' . $row['pid'] . '" data-toggle="modal"><i class="fas fa-thumbs-up" aria-hidden="true"></i> &nbsp; Approve</button>
-                                          <button type="button" class="btn btn-danger ml-1" data-target="#disapproveModal' . $row['pid'] . '" data-toggle="modal"><i class="fas fa-thumbs-down" aria-hidden="true"></i> &nbsp; Disapprove</button>
+                                      <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
+                                      <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
+                                      <td class="align-middle user-select-none">
+                                          <button type="button" class="btn btn-success mr-1" data-target="#approveModal' . $row['pid'] . '" data-toggle="modal">
+                                            <i class="fas fa-thumbs-up" aria-hidden="true"></i>&nbsp Approve
+                                          </button>
+                                          <button type="button" class="btn btn-danger ml-1" data-target="#disapproveModal' . $row['pid'] . '" data-toggle="modal">
+                                            <i class="fas fa-thumbs-down" aria-hidden="true"></i>&nbsp Disapprove
+                                          </button>
                                       </td>
                                   </tr>
                                 ';
@@ -145,10 +149,10 @@ if (!isset($_SESSION['role'])) {
                                   if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
                                     ?>
                                     <th class="align-middle" style="width: 0px !important">
-                                      <div class="custom-control custom-checkbox" style="padding: 0 0 0 31px">
+                                      <div class="custom-control custom-checkbox" style="padding: 0 0 0 30.75px">
                                         <input class="cbxMain custom-control-input" name="chk_delete[]" type="checkbox"
                                           id="cstm-chckbx-1" onchange="checkMain(this)">
-                                        <label for="cstm-chckbx-1" class="custom-control-label"></label>
+                                        <label for="cstm-chckbx-1" class="custom-control-label custom-label"></label>
                                       </div>
                                     </th>
                                     <?php
@@ -159,13 +163,13 @@ if (!isset($_SESSION['role'])) {
                                   <th class="align-middle user-select-none">Purpose</th>
                                   <th class="align-middle user-select-none">OR Number</th>
                                   <th class="align-middle user-select-none">Amount</th>
-                                  <th class="align-middle user-select-none">Option</th>
+                                  <th class="align-middle user-select-none" width="212px">Option</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'Approved'") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'approved'") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                     echo '
@@ -184,10 +188,10 @@ if (!isset($_SESSION['role'])) {
                                             <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
                                             <td class="align-middle user-select-none">
                                               <button type="button" class="btn btn-success ml-1" data-target="#editModal' . $row['pid'] . '" data-toggle="modal">
-                                                <i class="fas fa-edit" aria-hidden="true"></i> &nbsp; Edit
+                                                <i class="fas fa-edit" aria-hidden="true"></i>&nbsp Edit
                                               </button>
                                               <a target="_blank" href="form.php?resident=' . $row['residentid'] . '&permit=' . $row['permitNo'] . '&val=' . base64_encode($row['permitNo'] . '|' . $row['residentname'] . '|' . $row['dateRecorded']) . '"" class="btn btn-primary ml-1">
-                                                <i class="fas fa-download" aria-hidden="true"></i> &nbsp; Generate
+                                                <i class="fas fa-download" aria-hidden="true"></i>&nbsp Generate
                                               </a>
                                             </td>
                                         </tr>
@@ -195,22 +199,22 @@ if (!isset($_SESSION['role'])) {
                                     include "modal/edit.mod.php";
                                   }
                                 } else {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'Approved'") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'approved'") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td>' . $row['permitNo'] . '</td>
-                                            <td>' . $row['residentname'] . '</td>
-                                            <td>' . $row['findings'] . '</td>
-                                            <td>' . $row['purpose'] . '</td>
-                                            <td>' . $row['orNo'] . '</td>
-                                            <td>₱ ' . number_format($row['samount'], 2) . '</td>
-                                            <td>
-                                              <button class="btn btn-primary btn-sm" data-target="#editModal' . $row['pid'] . '" data-toggle="modal">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                                            <td class="align-middle user-select-none">' . $row['permitNo'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['findings'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['orNo'] . '</td>
+                                            <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
+                                            <td class="align-middle user-select-none">
+                                              <button type="button" class="btn btn-success ml-1" data-target="#editModal' . $row['pid'] . '" data-toggle="modal">
+                                                <i class="fas fa-edit" aria-hidden="true"></i>&nbsp Edit
                                               </button>
-                                              <a target="_blank" href="form.php?resident=' . $row['residentid'] . '&permit=' . $row['permitNo'] . '&val=' . sha1($row['permitNo'] . '|' . $row['residentname'] . '|' . $row['dateRecorded']) . '"" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Generate
+                                              <a target="_blank" href="form.php?resident=' . $row['residentid'] . '&permit=' . $row['permitNo'] . '&val=' . base64_encode($row['permitNo'] . '|' . $row['residentname'] . '|' . $row['dateRecorded']) . '"" class="btn btn-primary ml-1">
+                                                <i class="fas fa-download" aria-hidden="true"></i>&nbsp Generate
                                               </a>
                                             </td>
                                         </tr>
@@ -230,10 +234,10 @@ if (!isset($_SESSION['role'])) {
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
                                   ?>
                                   <th class="align-middle" style="width: 0px !important">
-                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 31px">
+                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 30.75px">
                                       <input class="cbxMain custom-control-input" name="chk_delete[]" type="checkbox"
                                         id="cstm-chckbx-3" onchange="checkMain(this)">
-                                      <label for="cstm-chckbx-3" class="custom-control-label"></label>
+                                      <label for="cstm-chckbx-3" class="custom-control-label custom-label"></label>
                                     </div>
                                   </th>
                                   <?php
@@ -245,7 +249,7 @@ if (!isset($_SESSION['role'])) {
                               <tbody>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid where status = 'Disapproved' ") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                     echo '
@@ -256,21 +260,21 @@ if (!isset($_SESSION['role'])) {
                                                 <label for="' . $checkboxId . '" class="custom-control-label"></label>
                                               </div>
                                             </td>
-                                            <td>' . $row['residentname'] . '</td>
-                                            <td>' . $row['findings'] . '</td>
-                                            <td>' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['findings'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
                                         </tr>
                                       ';
                                     include "modal/edit.mod.php";
                                   }
                                 } else {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid where status = 'Disapproved' ") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td>' . $row['residentname'] . '</td>
-                                            <td>' . $row['findings'] . '</td>
-                                            <td>' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['findings'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
                                         </tr>
                                       ';
                                     include "modal/edit.mod.php";
@@ -294,7 +298,7 @@ if (!isset($_SESSION['role'])) {
                 </div>
                 <!-- /. col-12 -->
                 <?php
-              } elseif ((isset($_SESSION['role']) && $_SESSION['role'] == "captain")) {
+              } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "captain") || (!isset($_SESSION['role']) && $_SESSION['role'] !== "administrator") && (!isset($_SESSION['role']) && $_SESSION['role'] !== "staff") && (!isset($_SESSION['role']) && $_SESSION['role'] !== "resident")) {
                 ?>
                 <div class="col-12 col-sm-12">
                   <div class="card card-primary card-outline">
@@ -303,22 +307,26 @@ if (!isset($_SESSION['role'])) {
                         <table id="tblpermit" class="table table-bordered table-striped">
                           <thead>
                             <tr>
-                              <th class="align-middle">Resident Name</th>
-                              <th class="align-middle">Purpose</th>
-                              <th class="align-middle">Option</th>
+                              <th class="align-middle user-select-none">Resident Name</th>
+                              <th class="align-middle user-select-none">Purpose</th>
+                              <th class="align-middle user-select-none">Option</th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php
-                            $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'New'") or die('Error: ' . mysqli_error($con));
+                            $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblpermit p left join tblresident r on r.id = p.residentid  where status = 'new'") or die('Error: ' . mysqli_error($con));
                             while ($row = mysqli_fetch_array($squery)) {
                               echo '
                                   <tr>
-                                      <td>' . $row['residentname'] . '</td>
-                                      <td>' . $row['purpose'] . '</td>
-                                      <td class="align-middle">
-                                          <button type="button" class="btn btn-success mr-1" data-target="#approveModal' . $row['pid'] . '" data-toggle="modal"><i class="fas fa-thumbs-up" aria-hidden="true"></i> &nbsp; Approve</button>
-                                          <button type="button" class="btn btn-danger ml-1" data-target="#disapproveModal' . $row['pid'] . '" data-toggle="modal"><i class="fas fa-thumbs-down" aria-hidden="true"></i> &nbsp; Disapprove</button>
+                                      <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
+                                      <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
+                                      <td class="align-middle user-select-none">
+                                          <button type="button" class="btn btn-success mr-1" data-target="#approveModal' . $row['pid'] . '" data-toggle="modal">
+                                            <i class="fas fa-thumbs-up" aria-hidden="true"></i>&nbsp Approve
+                                          </button>
+                                          <button type="button" class="btn btn-danger ml-1" data-target="#disapproveModal' . $row['pid'] . '" data-toggle="modal">
+                                            <i class="fas fa-thumbs-down" aria-hidden="true"></i>&nbsp Disapprove
+                                          </button>
                                       </td>
                                   </tr>
                                 ';
@@ -335,7 +343,7 @@ if (!isset($_SESSION['role'])) {
                 </div>
                 <!-- /. col-12 -->
                 <?php
-              } elseif ((isset($_SESSION['role']) && $_SESSION['role'] == "resident")) {
+              } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "resident") || (!isset($_SESSION['role']) && $_SESSION['role'] !== "administrator") && (!isset($_SESSION['role']) && $_SESSION['role'] !== "staff") && (!isset($_SESSION['role']) && $_SESSION['role'] !== "captain")) {
                 ?>
                 <div class="col-12 col-sm-12">
                   <div class="card card-primary card-outline">
@@ -380,17 +388,17 @@ if (!isset($_SESSION['role'])) {
                             <table id="tblpermit" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
-                                  <th class="align-middle">Purpose</th>
+                                  <th class="align-middle user-select-none">Purpose</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'New' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'new' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td>' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
                                         </tr>
                                       ';
                                   }
@@ -407,10 +415,10 @@ if (!isset($_SESSION['role'])) {
                                   if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff") && !(isset($_SESSION['role']) && $_SESSION['role'] == "captain") || !(isset($_SESSION['role']) && $_SESSION['role'] == "resident")) {
                                     ?>
                                     <th class="align-middle" style="width: 0px !important">
-                                      <div class="custom-control custom-checkbox" style="padding: 0 0 0 31px">
+                                      <div class="custom-control custom-checkbox" style="padding: 0 0 0 30.75px">
                                         <input class="cbxMain custom-control-input" name="chk_delete[]" type="checkbox"
                                           id="cstm-chckbx-1" onchange="checkMain(this)">
-                                        <label for="cstm-chckbx-1" class="custom-control-label"></label>
+                                        <label for="cstm-chckbx-1" class="custom-control-label custom-label"></label>
                                       </div>
                                     </th>
                                     <?php
@@ -424,16 +432,16 @@ if (!isset($_SESSION['role'])) {
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'Approved' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'approved' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td>' . $row['permitNo'] . '</td>
-                                            <td>' . $row['findings'] . '</td>
-                                            <td>' . $row['purpose'] . '</td>
-                                            <td>' . $row['orNo'] . '</td>
-                                            <td>₱ ' . number_format($row['samount'], 2) . '</td>
+                                            <td class="align-middle user-select-none">' . $row['permitNo'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['findings'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['orNo'] . '</td>
+                                            <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
                                         </tr>
                                       ';
                                   }
@@ -450,26 +458,26 @@ if (!isset($_SESSION['role'])) {
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff") && !(isset($_SESSION['role']) && $_SESSION['role'] == "captain") || !(isset($_SESSION['role']) && $_SESSION['role'] == "resident")) {
                                   ?>
                                   <th class="align-middle" style="width: 0px !important">
-                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 31px">
+                                    <div class="custom-control custom-checkbox" style="padding: 0 0 0 30.75px">
                                       <input class="cbxMain custom-control-input" name="chk_delete[]" type="checkbox"
                                         id="cstm-chckbx-3" onchange="checkMain(this)">
-                                      <label for="cstm-chckbx-3" class="custom-control-label"></label>
+                                      <label for="cstm-chckbx-3" class="custom-control-label custom-label"></label>
                                     </div>
                                   </th>
                                   <?php
                                 } ?>
-                                <th>Findings</th>
-                                <th>Purpose</th>
+                                <th class="align-middle user-select-none">Findings</th>
+                                <th class="align-middle user-select-none">Purpose</th>
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'Disapproved' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblpermit p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td>' . $row['findings'] . '</td>
-                                            <td>' . $row['purpose'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['findings'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
                                         </tr>
                                       ';
                                   }
@@ -500,11 +508,12 @@ if (!isset($_SESSION['role'])) {
       </div>
       <!-- /.content-wrapper -->
     </div>
+    <!-- ./wrapper -->
   <?php }
 include "../../include/footer.inc.php" ?>
   <script type="text/javascript">
     <?php
-    if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
+    if ((isset($_SESSION['role']) && $_SESSION['role'] === "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] === "staff")) {
       ?>
       $(function () {
         $("#tblpermit").DataTable({
@@ -557,7 +566,7 @@ include "../../include/footer.inc.php" ?>
         }).buttons().container().appendTo('#tblpermit2_wrapper .col-md-6:eq(0)')
       });
       <?php
-    } elseif ((isset($_SESSION['role']) && $_SESSION['role'] == "captain")) {
+    } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "captain")) {
       ?>
       $(document).ready(function () {
         $("#tblpermit").DataTable({
@@ -571,13 +580,14 @@ include "../../include/footer.inc.php" ?>
           "autoWidth": false,
           "responsive": true,
           "aoColumnDefs": [
-            { "orderable": false, "targets": 2 }
+            { "bSortable": false, "aTargets": [2] },
+            { "orderable": false, "targets": [2] }
           ],
           "aaSorting": []
         }).buttons().container().appendTo('#tblpermit_wrapper .col-md-6:eq(0)')
       });
       <?php
-    } elseif ((isset($_SESSION['role']) && $_SESSION['role'] == "resident")) {
+    } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "resident")) {
       ?>
       $(function () {
         $("#tblpermit").DataTable({
@@ -590,8 +600,9 @@ include "../../include/footer.inc.php" ?>
           "info": true,
           "autoWidth": false,
           "responsive": true,
-          "columnDefs": [
-            { "orderable": true, "targets": [0, 1] }
+          "aoColumnDefs": [
+            { "bSortable": true, "aTargets": [0] },
+            { "orderable": true, "targets": [0] }
           ],
           "aaSorting": []
         }).buttons().container().appendTo('#tblpermit_wrapper .col-md-6:eq(0)')
@@ -606,7 +617,8 @@ include "../../include/footer.inc.php" ?>
           "autoWidth": false,
           "responsive": true,
           "aoColumnDefs": [
-            { "orderable": true, "targets": [0, 1] }
+            { "bSortable": true, "aTargets": [0, 4] },
+            { "orderable": true, "targets": [0, 4] }
           ],
           "aaSorting": []
         }).buttons().container().appendTo('#tblpermit1_wrapper .col-md-6:eq(0)')
@@ -620,7 +632,8 @@ include "../../include/footer.inc.php" ?>
           "info": true,
           "autoWidth": false,
           "responsive": true,
-          "columnDefs": [
+          "aoColumnDefs": [
+            { "bSortable": true, "aTargets": [0, 1] },
             { "orderable": true, "targets": [0, 1] }
           ],
           "aaSorting": []
