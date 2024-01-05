@@ -1,64 +1,76 @@
-<div id="addModal" class="modal fade">
-  <form method="post">
-    <div class="modal-dialog">
+<div class="modal fade" id="addModal">
+  <form action="" method="post" enctype="multipart/form-data">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Manage Officials</h4>
+        <div class="modal-header align-items-center">
+          <h4 class="modal-title">Add Official</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+          </button>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="control-label">Position</label>
-                <select name="ddl_pos" class="form-control select2" data-minimum-results-for-search="Infinity">
-                  <option selected disabled>Please select your position</option>
-                  <option value="barangay captain">Barangay Captain</option>
-                  <option value="kagawad (ordinance)">Barangay Kagawad (Ordinance)</option>
-                  <option value="kagawad (public safety)">Barangay Kagawad (Public Safety)</option>
-                  <option value="kagawad (tourism)">Barangay Kagawad (Tourism)</option>
-                  <option value="kagawad (budget & finance)">Barangay Kagawad (Budget & Finance)</option>
-                  <option value="kagawad (agriculture)">Barangay Kagawad (Agriculture)</option>
-                  <option value="kagawad (education)">Barangay Kagawad (Education)</option>
-                  <option value="kagawad (infrastracture)">Barangay Kagawad (Infrastracture)</option>
-                  <option value="sk chairman">SK Chairman</option>
-                  <option value="secretary">Barangay Secretary</option>
-                  <option value="treasurer">Barangay Treasurer</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="control-label">Name</label>
-                <select name="txt_cname" class="form-control select2">
-                  <option selected disabled>Please select your name</option>
-                  <?php
-                  $squery = mysqli_query($con, "SELECT fname, lname, mname FROM tblresident");
-                  while ($row = mysqli_fetch_array($squery)) {
-                    echo ' <option value="' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '">' . ucwords(strtolower($row['lname'])) . ', ' . ucwords(strtolower($row['fname'])) . ' ' . ucwords(strtolower($row['mname'])) . '</option> ';
-                  } ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Contact #:</label>
-                <input name="txt_contact" class="form-control" type="number" placeholder="Contact #">
-              </div>
-              <div class="form-group">
-                <label>Address:</label>
-                <input name="txt_address" class="form-control" type="text" placeholder="Address">
-              </div>
-              <div class="form-group">
-                <label>Start Term:</label>
-                <input id="txt_sterm" name="txt_sterm" class="form-control" type="date" placeholder="Start Term">
-              </div>
-              <div class="form-group">
-                <label>End Term:</label>
-                <input name="txt_eterm" class="form-control" type="date" placeholder="End Term">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label class="control-label">Position</label>
+                    <select name="ddl_pos" class="form-control select2" data-minimum-results-for-search="Infinity"
+                      autofocus>
+                      <option selected disabled>Please select your position</option>
+                      <option value="barangay captain">barangay captain</option>
+                      <option value="kagawad (ordinance)">barangay kagawad (ordinance)</option>
+                      <option value="kagawad (public safety)">barangay kagawad (public safety)</option>
+                      <option value="kagawad (tourism)">barangay kagawad (tourism)</option>
+                      <option value="kagawad (budget & finance)">barangay kagawad (budget & finance)</option>
+                      <option value="kagawad (agriculture)">barangay kagawad (agriculture)</option>
+                      <option value="kagawad (education)">barangay kagawad (education)</option>
+                      <option value="kagawad (infrastracture)">barangay kagawad (infrastracture)</option>
+                      <option value="sk chairman">sk chairman</option>
+                      <option value="secretary">barangay secretary</option>
+                      <option value="treasurer">barangay treasurer</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <select name="txt_cname" class="form-control select2">
+                      <option selected disabled>Please select your name</option>
+                      <?php
+                      $squery = mysqli_query($con, "SELECT fname, lname, mname FROM tblresident");
+                      while ($row = mysqli_fetch_array($squery)) {
+                        echo ' <option value="' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '">' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</option> ';
+                      } ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Contact #</label>
+                    <input name="txt_contact" class="form-control" type="number"
+                      placeholder="Please enter your contact number">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Address</label>
+                    <input name="txt_address" class="form-control" type="text" placeholder="Please enter your address">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="txt_sterm">Start Term</label>
+                    <input name="txt_sterm" id="txt_sterm" class="form-control" type="text"
+                      data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" placeholder="mm/dd/yyyy"
+                      data-mask>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="txt_eterm">End Term</label>
+                    <input name="txt_eterm" id="txt_eterm" class="form-control" type="text"
+                      data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" placeholder="mm/dd/yyyy"
+                      data-mask>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add Officials">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Save changes</button>
         </div>
       </div>
     </div>

@@ -2,8 +2,8 @@
   <form action="" method="post" enctype="multipart/form-data">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Manage Residents</h4>
+        <div class="modal-header align-items-center">
+          <h4 class="modal-title">Manage Blotter</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -82,7 +82,7 @@
                           <label class="control-label">Action</label>
                           <select name="ddl_acttaken" class="form-control select2"
                             data-minimum-results-for-search="Infinity">
-                            <option selected disabled>Please select offense</option>
+                            <option selected disabled>Please select actions</option>
                             <option value="first offense">First Offense</option>
                             <option value="second Option">Second Offense</option>
                             <option value="kulong">Kulong</option>
@@ -104,7 +104,7 @@
                         <div class="form-group">
                           <label class="control-label">Incidence</label>
                           <input name="txt_location" class="form-control" type="text"
-                            placeholder="Location of Incidence">
+                            placeholder="Please enter location of incidence">
                         </div>
                       </div>
                     </div>
@@ -115,8 +115,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Add Blotter</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Save changes</button>
         </div>
       </div>
     </div>

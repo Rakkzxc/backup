@@ -71,7 +71,7 @@ $(function () {
     .container()
     .appendTo("#tblresident1_wrapper .col-md-6:eq(0)");
 
-  /* tblpurok */
+  /* tblcaptain */
   $("#tblcaptain")
     .DataTable({
       responsive: true,
@@ -118,6 +118,54 @@ $(function () {
     .buttons()
     .container()
     .appendTo("#tblstaff_wrapper .col-md-6:eq(0)");
+
+  /* tblofficers */
+  $("#tblofficers")
+    .DataTable({
+      responsive: true,
+      lengthChange: false,
+      autoWidth: false,
+      buttons: ["copy", "csv", "excel", "pdf", "print"],
+      paging: true,
+      lengthChange: false,
+      searching: true,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      responsive: true,
+      aoColumnDefs: [
+        { bSortable: false, aTargets: [0, 5] },
+        { orderable: false, targets: 0 },
+      ],
+      aaSorting: [],
+    })
+    .buttons()
+    .container()
+    .appendTo("#tblofficers_wrapper .col-md-6:eq(0)");
+
+  /* tblreference */
+  $("#tblreference")
+    .DataTable({
+      responsive: true,
+      lengthChange: false,
+      autoWidth: false,
+      buttons: ["copy", "csv", "excel", "pdf", "print"],
+      paging: true,
+      lengthChange: false,
+      searching: true,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      responsive: true,
+      aoColumnDefs: [
+        { bSortable: false, aTargets: [0, 4] },
+        { orderable: false, targets: 0 },
+      ],
+      aaSorting: [],
+    })
+    .buttons()
+    .container()
+    .appendTo("#tblreference_wrapper .col-md-6:eq(0)");
 
   /* tblblotter */
   $("#tblblotter")

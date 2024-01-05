@@ -196,7 +196,7 @@ if(isset($_POST['btn_save'])) {
 
   $ddl_edit_los = $_POST['ddl_edit_los'];
   $ddl_edit_dtype = $_POST['ddl_edit_dtype'];
-  $txt_edit_sofwatersupply = $_POST['txt_edit_sofwatersupply'];
+  $txt_edit_sofwatersupply = implode(', ', $_POST['txt_edit_sofwatersupply']);
   $txt_edit_lightning = $_POST['txt_edit_lightning'];
   $txt_edit_toilet = $_POST['txt_edit_toilet'];
   $txt_edit_faddress = $_POST['txt_edit_faddress'];

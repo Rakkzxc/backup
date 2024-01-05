@@ -49,7 +49,10 @@ if (isset($_POST['btn_save'])) {
   $ddl_edit_stat = $_POST['ddl_edit_stat'];
   $txt_edit_location = $_POST['txt_edit_location'];
 
-  $update_query = mysqli_query($con, "UPDATE tblblotter set complainant = '" . $txt_edit_cname . "', cage = '" . $txt_edit_cage . "', caddress= '" . $txt_edit_cadd . "', personToComplain = '" . $txt_edit_pname . "', page = '" . $txt_edit_page . "', paddress= '" . $txt_edit_padd . "', pcontact = '" . $txt_edit_pcontact . "', complaint = '" . $txt_edit_complaint . "', actionTaken= '" . $ddl_edit_acttaken . "', sStatus = '" . $ddl_edit_stat . "', locationOfIncidence= '" . $txt_edit_location . "'  where id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
+  $year = date('Y');
+  $date = date('Y-m-d');
+
+  $update_query = mysqli_query($con, "UPDATE tblblotter set yearRecorded = '" . $year . "', dateRecorded = '" . $date . "', datetimeRecorded = NOW(), complainant = '" . $txt_edit_cname . "', cage = '" . $txt_edit_cage . "', caddress= '" . $txt_edit_cadd . "', personToComplain = '" . $txt_edit_pname . "', page = '" . $txt_edit_page . "', paddress= '" . $txt_edit_padd . "', pcontact = '" . $txt_edit_pcontact . "', complaint = '" . $txt_edit_complaint . "', actionTaken= '" . $ddl_edit_acttaken . "', sStatus = '" . $ddl_edit_stat . "', locationOfIncidence= '" . $txt_edit_location . "'  where id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
 
   if (isset($_SESSION['role'])) {
     $action = 'update blotter request by ' . $txt_edit_cname;

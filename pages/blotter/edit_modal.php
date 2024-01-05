@@ -117,8 +117,8 @@
                 <div class="col-sm-4">
                   <select name="ddl_edit_stat" class="form-control input-sm">
                     <option value="'.$row['sStatus'].'" selected>'.$row['sStatus'].'</option>
-                    <option>Solved</option>
-                    <option>Unsolved</option>
+                    <option>solved</option>
+                    <option>unsolved</option>
                   </select>
                 </div>
                 <div class="col-sm-2" style="width:110px;">

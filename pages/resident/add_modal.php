@@ -2,10 +2,10 @@
   <form action="" method="post" enctype="multipart/form-data">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Manage Residents</h4>
+        <div class="modal-header align-items-center">
+          <h4 class="modal-title">Add Residents</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
           </button>
         </div>
         <div class="modal-body">

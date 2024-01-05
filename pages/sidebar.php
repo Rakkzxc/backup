@@ -117,6 +117,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
             </ul>
         </li>
 
+        <li class="nav-header text-uppercase"><small>offenses</small></li>
+
         <li class="nav-item">
             <a href="../blotter/blotter.php" class="nav-link ' . ($page == "blotter.php" ? 'active' : '') . '">
               <i class="nav-icon fas fa-file-signature"></i>
@@ -125,6 +127,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
               </p>
             </a>
           </li>
+
+          <li class="nav-header text-uppercase"><small>issuance</small></li>
 
         <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'menu-open' : '') . '">
           <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'active' : '') . '">
@@ -157,6 +161,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
             </ul>
         </li>
 
+        <li class="nav-header text-uppercase"><small>communication</small></li>
+
         <li class="nav-item">
             <a href="../announcement/announcement.php" class="nav-link ' . ($page == "announcement.php" ? 'active' : '') . '">
               <i class="nav-icon fas fa-bullhorn"></i>
@@ -166,8 +172,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
             </a>
           </li>
 
-          <li class="nav-item ' . (($page == "staff.php" || $page == "captain.php") ? 'menu-open' : '') . '">
-            <a href="#" class="nav-link ' . (($page == "staff.php" || $page == "captain.php") ? 'active' : '') . '">
+          <li class="nav-header text-uppercase"><small>accounts</small></li>
+
+          <li class="nav-item ' . (($page == "captain.php" || $page == "staff.php") ? 'menu-open' : '') . '">
+            <a href="#" class="nav-link ' . (($page == "captain.php" || $page == "staff.php") ? 'active' : '') . '">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -190,6 +198,35 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
                 </li>
               </ul>
           </li>
+
+          <li class="nav-header text-uppercase"><small>certificate credentials</small></li>
+
+          <li class="nav-item ' . (($page == "reference.php" || $page == "officers.php") ? 'menu-open' : '') . '">
+            <a href="#" class="nav-link ' . (($page == "reference.php" || $page == "officers.php") ? 'active' : '') . '">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Credentials
+                <i class="fas fa-angle-right right"></i>
+                <span class="badge badge-danger right">3</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="../reference/reference.php" class="nav-link ' . ($page == "reference.php" ? 'active' : '') . '">
+                    <i class="fas fa-angle-right nav-icon"></i>
+                    <p>Reference</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../officers/officers.php" class="nav-link ' . ($page == "officers.php" ? 'active' : '') . '">
+                    <i class="fas fa-angle-right nav-icon"></i>
+                    <p>Officers</p>
+                  </a>
+                </li>
+              </ul>
+          </li>
+
+          <li class="nav-header text-uppercase"><small>reporting</small></li>
 
         <li class="nav-item">
             <a href="../report/report.php" class="nav-link ' . ($page == "report.php" ? 'active' : '') . '">

@@ -99,8 +99,8 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">Water Usage:</label>
-                  <select name="txt_edit_water" class="form-control input-sm input-size">
-                    <option>' . $erow['waterUsage'] . '</option>
+                  <select name="txt_edit_sofwatersupply" class="form-control input-sm input-size">
+                    <option>' . $erow['sourceofwatersupply'] . '</option>
                     <option>Faucet</option>
                     <option>Deep Well</option>
                   </select>

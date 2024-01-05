@@ -1,41 +1,49 @@
-<div id="addModal" class="modal fade">
-  <form method="post">
-    <div class="modal-dialog modal-sm" style="width:300px !important;">
+<div class="modal fade" id="addModal">
+  <form action="" method="post" enctype="multipart/form-data">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Manage Household</h4>
+        <div class="modal-header align-items-center">
+          <h4 class="modal-title">Add Household</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+          </button>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Household #:</label>
-                <input onkeyup="show_head()" id="txt_householdno" name="txt_householdno" class="form-control"
-                  type="number" placeholder="Household #" />
-              </div>
-              <div class="form-group">
-                <label>Purok:</label>
-                <input name="txt_purok" class="form-control" type="text" placeholder="Purok" />
-              </div>
-              <div class="form-group">
-                <label>Total Number of Members:</label>
-                <input id="txt_totalmembers" name="txt_totalmembers" class="form-control" type="text"
-                  placeholder="Total Number of Members" readonly />
-              </div>
-              <div class="form-group">
-                <label>Head Of Family:</label>
-                <select id="txt_hof" name="txt_hof" class="form-control select2" style="width:100%"
-                  onchange="show_total()">
-                  <option disabled selected>-- Input Household # First --</option>
-                </select>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 col-md-12 col-sm-12">
+                  <div class="form-group pr-1">
+                    <label>Household #</label>
+                    <input onkeyup="show_head()" id="txt_householdno" name="txt_householdno" class="form-control"
+                      type="number" placeholder="Please enter your household number" autofocus required>
+                  </div>
+                  <div class="form-group pr-1">
+                    <label>Purok</label>
+                    <input name="txt_purok" class="form-control" type="text" placeholder="Please enter your address"
+                      required>
+                  </div>
+                  <div class="form-group pr-1">
+                    <label>Total Number of Household Members</label>
+                    <input id="txt_totalmembers" name="txt_totalmembers" class="form-control" type="text"
+                      placeholder="This is auto generated" readonly required>
+                  </div>
+                  <div class="form-group pr-1">
+                    <label>Head of the Family</label>
+                    <span class="badge badge-warning ml-2">Please enter household number first</span>
+                    <select id="txt_hof" name="txt_hof" class="form-control select2"
+                      data-minimum-results-for-search="Infinity" required onchange="show_total()">
+                      <option selected disabled>Please select the head of family</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />
-          <input type="submit" class="btn btn-primary btn-sm" name="btn_add" value="Add Household" />
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="btn_add" id="btn_add">Save changes</button>
         </div>
       </div>
     </div>

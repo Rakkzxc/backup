@@ -8,12 +8,12 @@ if (isset($_POST['hhold_id'])) {
 	$result = mysqli_stmt_get_result($stmt);
 
 	if ($result) {
-		echo '<option value="" disabled selected>-- Select Head of Family -- </option>';
+		echo '<option selected disabled>Please select the head of family</option>';
 		while ($row = mysqli_fetch_assoc($result)) {
 			echo '<option value="' . $row['resID'] . '">' . $row['lname'] . ', ' . $row['fname'] . ' ' . $row['mname'] . '</option>';
 		}
 	} else {
-		echo '<option value="" disabled selected>-- No Existing Head of Family for Household # entered --</option>';
+		echo '<option selected disabled>No existing head of family for household # entered</option>';
 	}
 	mysqli_stmt_close($stmt);
 }
@@ -29,7 +29,7 @@ if (isset($_POST['total_id'])) {
 		$row = mysqli_fetch_assoc($result);
 		echo "<script>document.getElementsByName('txt_totalmembers')[0].value = " . $row['totalhousehold'] . ";</script>";
 	} else {
-		echo '<option value="" disabled selected>-- No Existing Head of Family for Household # entered --</option>';
+		echo '<option selected disabled>No existing head of family for household # entered</option>';
 	}
 	mysqli_stmt_close($stmt);
 } ?>

@@ -101,7 +101,7 @@ if (!isset($_SESSION)) {
                               <th class="align-middle">Action</th>
                               <th class="align-middle">Status</th>
                               <th class="align-middle">Location</th>
-                              <th class="align-middle" width="122.5px">Option</th>
+                              <th class="align-middle" width="101px">Option</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -127,7 +127,7 @@ if (!isset($_SESSION)) {
                                       <td class="align-middle">' . $row['locationOfIncidence'] . '</td>
                                       <td class="align-middle">
                                         <button type="button" class="btn btn-primary" data-target="#editModal' . $row['bid'] . '" data-toggle="modal">
-                                          <i class="fas fa-edit" aria-hidden="true"></i> Edit Details
+                                          <i class="fas fa-edit" aria-hidden="true"></i> Update
                                         </button>
                                       </td>
                                   </tr>

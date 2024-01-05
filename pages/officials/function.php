@@ -4,8 +4,9 @@ if (isset($_POST['btn_add'])) {
   $txt_cname = $_POST['txt_cname'];
   $txt_contact = $_POST['txt_contact'];
   $txt_address = $_POST['txt_address'];
-  $txt_sterm = $_POST['txt_sterm'];
-  $txt_eterm = $_POST['txt_eterm'];
+  $txt_sterm = date('Y-m-d', strtotime($_POST['txt_sterm']));
+  $txt_eterm = date('Y-m-d', strtotime($_POST['txt_eterm']));
+
 
   if (isset($_SESSION['role'])) {
     $action = 'added barangay official named ' . $txt_cname;
@@ -33,8 +34,8 @@ if (isset($_POST['btn_save'])) {
   $txt_edit_cname = $_POST['txt_edit_cname'];
   $txt_edit_contact = $_POST['txt_edit_contact'];
   $txt_edit_address = $_POST['txt_edit_address'];
-  $txt_edit_sterm = $_POST['txt_edit_sterm'];
-  $txt_edit_eterm = $_POST['txt_edit_eterm'];
+  $txt_edit_sterm = date('Y-m-d', strtotime($_POST['txt_edit_sterm']));
+  $txt_edit_eterm = date('Y-m-d', strtotime($_POST['txt_edit_eterm']));
 
   if (isset($_SESSION['role'])) {
     $action = 'update barangay official named ' . $txt_edit_cname;

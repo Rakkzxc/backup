@@ -24,12 +24,16 @@ CREATE TABLE `tbladdlogo` (
 
 CREATE TABLE `tbladdofficeroftheday` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `officer` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `position` varchar(100) NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `author` varchar(100) NOT NULL,
+  `added_by` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO tbladdofficeroftheday VALUES("1","jeffern d. malinao","barangay kagawad","2024-01-05 00:01:47","system administrator");
+INSERT INTO tbladdofficeroftheday VALUES("2","flor cabillar","barangay kagawad","2024-01-05 00:02:12","system administrator");
+INSERT INTO tbladdofficeroftheday VALUES("3","clarish sargado","barangay kagawad","2024-01-05 00:02:27","system administrator");
 
 
 
@@ -161,7 +165,7 @@ CREATE TABLE `tbllogs` (
   `logdate` datetime NOT NULL DEFAULT current_timestamp(),
   `action` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO tbllogs VALUES("1","Administrator","2023-11-25 23:52:02","added resident named malinao, jeffern dulla");
 INSERT INTO tbllogs VALUES("2","Administrator","2023-11-25 23:53:49","added resident named cabillar, flor ");
@@ -182,6 +186,9 @@ INSERT INTO tbllogs VALUES("16","Administrator","2023-11-26 00:24:05","added sta
 INSERT INTO tbllogs VALUES("17","Administrator","2023-11-26 00:24:31","added staff named jasper tesoro");
 INSERT INTO tbllogs VALUES("18","Administrator","2023-11-26 00:25:32","added purok leader named katrina de ramos");
 INSERT INTO tbllogs VALUES("19","Administrator","2023-11-26 00:25:53","added purok leader named christopher estrera");
+INSERT INTO tbllogs VALUES("20","administrator","2024-01-05 00:01:47","added officer named jeffern d. malinao");
+INSERT INTO tbllogs VALUES("21","administrator","2024-01-05 00:02:12","added officer named flor cabillar");
+INSERT INTO tbllogs VALUES("22","administrator","2024-01-05 00:02:27","added officer named clarish sargado");
 
 
 
