@@ -5,16 +5,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Edit Clearance</h4>
+          <h4 class="modal-title">Edit Indigent</h4>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
               <input type="hidden" value="' . $row['pid'] . '" name="hidden_id" id="hidden_id" />
               <div class="form-group">
-                <label>Clearance #: </label>
+                <label>Indigent #: </label>
                 <input name="txt_edit_cnum" class="form-control input-sm" type="text"
-                  value="' . $row['clearanceNo'] . '" />
+                  value="' . $row['indigent_number'] . '" />
               </div>
               <div class="form-group">
                 <label>Resident: </label>
@@ -32,12 +32,12 @@
               </div>
               <div class="form-group">
                 <label>OR Number : </label>
-                <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="' . $row['orNo'] . '" />
+                <input name="txt_edit_ornum" class="form-control input-sm" type="text" value="' . $row['or_number'] . '" />
               </div>
               <div class="form-group">
                 <label>Amount : </label>
                 <input name="txt_edit_amount" class="form-control input-sm" type="text"
-                  value="' . $row['samount'] . '" />
+                  value="' . $row['amount'] . '" />
               </div>
             </div>
           </div>

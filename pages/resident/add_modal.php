@@ -77,6 +77,34 @@
                     <label class="control-label">IgpitID:</label>
                     <input name="txt_igpit" class="form-control" type="number" placeholder="" min="1">
                   </div>
+
+                  <div class="form-group pr-1">
+                    <label class="control-label">WRA (15-49) Years Old</label>
+                    <div class="row">
+                      <div class="col-8">
+                        <select name="txt_igpit" class="form-control select2"
+                          data-minimum-results-for-search="Infinity">
+                          <option selected disabled>Please select family planning method</option>
+                          <option value="bilateral tubal ligation">(BTL) Bilateral tubal ligation</option>
+                          <option value="vasectomy">(VAS) Vasectomy</option>
+                          <option value="pills">(P) Pills</option>
+                          <option value="condom">(CON) Condom</option>
+                          <option value="intra-uterine device">(IUD) Intra-uterine device</option>
+                          <option value="injectable">(INJ) Injectable</option>
+                          <option value="standard days method">(SDM) Standard days method</option>
+                          <option value="basal body temp">(BBT) Basal body temp</option>
+                          <option value="sympto thermal method">(STM) Sympto thermal method</option>
+                          <option value="lactating amenorrhea">(LAM) Lactating amenorrhea</option>
+                          <option value="cervical mucus">(CM) Cervical mucus</option>
+                          <option value="implant">(IMP) Implant</option>
+                        </select>
+                      </div>
+                      <div class="col-4">
+                        <input type="text" name="txt_occp" class="form-control" placeholder="None user">
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group pr-1">
                     <label class="control-label">Educational Attainment</label>
                     <select name="ddl_eattain" class="form-control select2" data-minimum-results-for-search="Infinity">
@@ -108,7 +136,7 @@
                       <option value="community water system">Community Water System</option>
                       <option value="developed spring">Developed Spring</option>
                       <option value="protected well">Protected Well</option>
-                      <option value="truck/tanker peddler">Truck/tanker Peddler</option>
+                      <option value="truck/tanker peddler">Truck/Tanker Peddler</option>
                       <option value="bottled water">Bottled Water</option>
                       <option value="undevelop spring">Undevelop Spring</option>
                       <option value="unprotected well">Unprotected Well</option>
@@ -117,12 +145,28 @@
                     </select>
                   </div>
                   <div class="form-group pr-1">
-                    <label class="control-label">Sanitary Toilet:</label>
-                    <select name="txt_toilet" class="form-control">
-                      <option value="water-sealed">Water-sealed</option>
-                      <option value="antipolo">Antipolo</option>
-                      <option value="none">None</option>
-                    </select>
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="control-label">Types of Toilet</label>
+                        <select name="txt_toilet" id="typesOfToiletSelect" class="form-control select2"
+                          data-minimum-results-for-search="Infinity">
+                          <option selected disabled>Please select types of toilet</option>
+                          <option value="water sealed/flush toilet">Water sealed/Flush toilet</option>
+                          <option value="closed pit privy">Closed pit privy</option>
+                          <option value="open pit privy">Open pit privy</option>
+                          <option value="communal toilet">Communal toilet</option>
+                          <option value="drop/overhung">Drop/Overhung</option>
+                          <option value="field/body of water">Field/Body of water</option>
+                          <option value="no toilet">No toilet</option>
+                          <option value="others">Others, please specify</option>
+                        </select>
+                      </div>
+                      <div class="col-6">
+                        <label class="control-label">Specify the types of Toilet</label>
+                        <input type="text" name="txt_occp" id="typesOfToiletSpecified" class="form-control cstm_crsr"
+                          placeholder="Please specify types of toilet" disabled autofocus>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group pr-1">
                     <label class="control-label">Remarks:</label>

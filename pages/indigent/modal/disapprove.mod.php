@@ -4,14 +4,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Disapprove Clearance</h4>
+          <h4 class="modal-title">Disapprove Indigent</h4>
         </div>
         <div class="modal-body">
           <?php
           echo '
                 <input type="hidden" value="' . $row['pid'] . '" name="hidden_id" id="hidden_id"/>';
           ?>
-          <p>Are you sure you want to disapproved this clearance? If yes, put the findings.</p>
+          <p>Are you sure you want to disapproved this indigent? If yes, put the findings.</p>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">

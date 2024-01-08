@@ -285,11 +285,11 @@ include "../../include/footer.inc.php" ?>
     /* occupation input */
     $(document).ready(function () {
       // Add an event listener to the select element
-      $("#occupationSelect").change(function () {
+      $("#occupationSelect, #typesOfToiletSelect").change(function () {
         // Get the selected value
         var selectedValue = $(this).val();
         // Get the input field for specifying the occupation
-        var occupationSpecified = $("#occupationSpecified");
+        var occupationSpecified = $("#occupationSpecified, #typesOfToiletSpecified");
         // If the selected value is "Others, please specify", enable the input; otherwise, disable it
         occupationSpecified.prop(
           "disabled",

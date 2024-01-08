@@ -4,5 +4,5 @@
 } ?>
 <div class="alert alert-length alert-autocloseable-length"
   style="background: #d9534f; position: fixed; top: 1em; right: 1em; z-index: 9999; display: none;">
-  <p style="font-size: 14px;">Cannot request clearance. You are below 6 months in your current address.</p>
+  <p style="font-size: 14px;">Cannot request indigent. You are below 6 months in your current address.</p>
 </div>

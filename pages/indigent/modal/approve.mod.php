@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Approve Clearance</h4>
+          <h4 class="modal-title">Approve Indigent</h4>
         </div>
         <div class="modal-body">
           <?php
@@ -14,8 +14,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Clearance #:</label>
-                <input name="txt_cnum" class="form-control input-sm" type="number" placeholder="Clearance #" />
+                <label>Indigent #:</label>
+                <input name="txt_cnum" class="form-control input-sm" type="number" placeholder="Indigent #" />
               </div>
               <div class="form-group">
                 <label>Findings:</label>

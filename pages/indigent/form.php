@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="clearance">
+<html id="indigent">
 <style>
   @media print {
     .noprint {
@@ -18,13 +18,13 @@ if (!isset($_SESSION['role'])) {
   header("Location: ../../login.php");
 } else {
   ob_start();
-  $_SESSION['clr'] = $_GET['clearance'];
+  $_SESSION['clr'] = $_GET['indigent'];
   include('../../include/global.inc.php') ?>
 
   <body>
     <?php include "../connection.php" ?>
-    <div style="margin: 55px 100px 0;" class="clearance_container">
-      <div class="clearance_header"
+    <div style="margin: 55px 100px 0;" class="indigent_container">
+      <div class="indigent_header"
         style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%; height: 100%;">
         <div class="left_logo">
           <img style="width: 150px; height: 150px;" src="../../assets/img/city-logo.png" alt="Logo">
@@ -52,7 +52,7 @@ if (!isset($_SESSION['role'])) {
       <br>
       <br>
       <br>
-      <h1 class="text-center text-uppercase text-bold">barangay clearance</h1>
+      <h1 class="text-center text-uppercase text-bold">certificate of indigency</h1>
       <br>
       <br>
       <h3 class="text-uppercase"><i>to whom it may concern:</i></h3>
@@ -80,25 +80,28 @@ if (!isset($_SESSION['role'])) {
           }
         }
 
-        $qry = mysqli_query($con, "SELECT * from tblresident r left join tblclearance c on c.residentid = r.id where residentid = '" . $_GET['resident'] . "' and clearanceNo = '" . $_GET['clearance'] . "' ");
+        $qry = mysqli_query($con, "SELECT r.*, c.*, t.ref_name
+        FROM tblresident r
+        LEFT JOIN tblindigent c ON c.resident_id = r.id
+        LEFT JOIN tbladdreference t ON t.id = r.id
+        WHERE r.id = '" . $_GET['resident'] . "' AND c.indigent_number = '" . $_GET['indigent'] . "'");
         while ($row = mysqli_fetch_array($qry)) {
           $bdate = date_create($row['bdate']);
-          $date = date_create($row['dateRecorded']);
+          $date = date_create($row['date_recorded']);
           $day = date_format($date, 'd');
           $month = date_format($date, 'F');
           $year = date_format($date, 'Y');
           $dayWithSuffix = addDaySuffix($day);
           echo '
                   <h3 style="line-height: 1.8;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This is to certify that <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp; &nbsp;" . ucwords(strtolower($row['fname'])) . " " . ucwords(strtolower($row['mname'])) . " " . ucwords(strtolower($row['lname'])) . "&nbsp; &nbsp; &nbsp;" . '</span>, <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp;" . $row['age'] . "&nbsp; &nbsp;" . '</span>, years
-                  old, <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp;" . ucfirst(strtolower($row['civilstatus'])) . "/" . ucfirst(strtolower($row['civilstatus'])) . "&nbsp; &nbsp;" . '</span> a bonafide resident of Purok <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp;" . ucwords(strtolower($row['purok'])) . "&nbsp; &nbsp;" . '</span>, Barangay New Pandan, Panabo City.
+                  old, <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp;" . ucfirst(strtolower($row['civilstatus'])) . "&nbsp; &nbsp;" . '</span> is a bonafide resident of Purok <span style="display: inline; border-bottom: 1px solid #000000;">' . "&nbsp; &nbsp;" . ucwords(strtolower($row['purok'])) . "&nbsp; &nbsp;" . '</span>, Barangay New Pandan, Panabo City.
                   <br>
                   <br>
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This is to certify further that the above-mentioned has no criminal/civil
-                  records or any pending case filed against him/her.
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This is to certify further that the aforementioned name <b>belongs to the indigent families,</b> this barangay.
                   <br>
                   <br>
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This certification is
-                  being issued upon the verbal request of the above-mentioned for whatever legal purposes it may serve him/her
+                  being issued upon verbal request of the above-mentioned for whatever legal purposes it may serve him/her
                   best.
                   <br>
                   <br>
@@ -121,7 +124,7 @@ if (!isset($_SESSION['role'])) {
       </div>
       <button class="noprint" id="printpagebutton"
         style="width: 100%; height: 100%; background: blue; border: none; outline: none; padding: 7px 25px; font-size: 16px; color: whitesmoke; border-radius: 7px; margin: 70px 0 20px 0;"
-        onclick="PrintElem('#clearance')">Print</button>
+        onclick="PrintElem('#indigent')">Print</button>
     </div>
   </body>
   <?php

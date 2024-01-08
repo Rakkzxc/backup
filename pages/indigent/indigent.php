@@ -58,11 +58,11 @@ if (!isset($_SESSION['role'])) {
                     <div class="card-header">
                       <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#addModal"><i
                           class="fa fa-user-plus" aria-hidden="true"></i>
-                        &nbsp; Add Clearance</button>
+                        &nbsp; Add Indigent</button>
                       <?php if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) { ?>
                         <button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#deleteModal"><i
                             class="fas fa-trash-alt" aria-hidden="true"></i>
-                          &nbsp; Delete Clearance</button>
+                          &nbsp; Delete Indigent</button>
                       <?php } ?>
                     </div>
                   </div>
@@ -93,7 +93,7 @@ if (!isset($_SESSION['role'])) {
                         <div class="tab-content" id="custom-tabs-four-tabContent">
                           <!-- new -->
                           <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-cstm-tab">
-                            <table id="tblclearance" class="table table-bordered table-striped table-hover">
+                            <table id="tblindigent" class="table table-bordered table-striped table-hover">
                               <thead>
                                 <tr>
                                   <th class="align-middle user-select-none" style="width: 0px !important">
@@ -110,7 +110,7 @@ if (!isset($_SESSION['role'])) {
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid  where status = 'new'") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id  where status = 'new'") or die('Error: ' . mysqli_error($con));
                                 while ($row = mysqli_fetch_array($squery)) {
                                   $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                   echo '
@@ -142,7 +142,7 @@ if (!isset($_SESSION['role'])) {
                           </div>
                           <!-- approved -->
                           <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-cstm-tab">
-                            <table id="tblclearance1" class="table table-bordered table-striped table-hover">
+                            <table id="tblindigent1" class="table table-bordered table-striped table-hover">
                               <thead>
                                 <tr>
                                   <?php
@@ -157,7 +157,7 @@ if (!isset($_SESSION['role'])) {
                                     </th>
                                     <?php
                                   } ?>
-                                  <th class="align-middle user-select-none">Clearance #</th>
+                                  <th class="align-middle user-select-none">Indigent #</th>
                                   <th class="align-middle user-select-none">Resident Name</th>
                                   <th class="align-middle user-select-none">Findings</th>
                                   <th class="align-middle user-select-none">Purpose</th>
@@ -169,7 +169,7 @@ if (!isset($_SESSION['role'])) {
                               <tbody>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid  where status = 'approved'") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id  where status = 'approved'") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                     echo '
@@ -180,17 +180,17 @@ if (!isset($_SESSION['role'])) {
                                                 <label for="' . $checkboxId . '" class="custom-control-label"></label>
                                               </div>
                                             </td>
-                                            <td class="align-middle user-select-none">' . $row['clearanceNo'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['indigent_number'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['findings'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
-                                            <td class="align-middle user-select-none">' . $row['orNo'] . '</td>
-                                            <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
+                                            <td class="align-middle user-select-none">' . $row['or_number'] . '</td>
+                                            <td class="align-middle user-select-none">₱ ' . number_format($row['amount'], 2) . '</td>
                                             <td class="align-middle user-select-none">
                                               <button type="button" class="btn btn-success ml-1" data-target="#editModal' . $row['pid'] . '" data-toggle="modal">
                                                 <i class="fas fa-edit" aria-hidden="true"></i>&nbsp Edit
                                               </button>
-                                              <a target="_blank" href="form.php?resident=' . $row['residentid'] . '&clearance=' . $row['clearanceNo'] . '&val=' . base64_encode($row['clearanceNo'] . '|' . $row['residentname'] . '|' . $row['dateRecorded']) . '"" class="btn btn-primary ml-1">
+                                              <a target="_blank" href="form.php?resident=' . $row['resident_id'] . '&indigent=' . $row['indigent_number'] . '&val=' . base64_encode($row['indigent_number'] . '|' . $row['residentname'] . '|' . $row['date_recorded']) . '"" class="btn btn-primary ml-1">
                                                 <i class="fas fa-download" aria-hidden="true"></i>&nbsp Generate
                                               </a>
                                             </td>
@@ -199,21 +199,21 @@ if (!isset($_SESSION['role'])) {
                                     include "modal/edit.mod.php";
                                   }
                                 } else {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid  where status = 'approved'") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id  where status = 'approved'") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td class="align-middle user-select-none">' . $row['clearanceNo'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['indigent_number'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['residentname'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['findings'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
-                                            <td class="align-middle user-select-none">' . $row['orNo'] . '</td>
-                                            <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
+                                            <td class="align-middle user-select-none">' . $row['or_number'] . '</td>
+                                            <td class="align-middle user-select-none">₱ ' . number_format($row['amount'], 2) . '</td>
                                             <td class="align-middle user-select-none">
                                               <button type="button" class="btn btn-success ml-1" data-target="#editModal' . $row['pid'] . '" data-toggle="modal">
                                                 <i class="fas fa-edit" aria-hidden="true"></i>&nbsp Edit
                                               </button>
-                                              <a target="_blank" href="form.php?resident=' . $row['residentid'] . '&clearance=' . $row['clearanceNo'] . '&val=' . base64_encode($row['clearanceNo'] . '|' . $row['residentname'] . '|' . $row['dateRecorded']) . '"" class="btn btn-primary ml-1">
+                                              <a target="_blank" href="form.php?resident=' . $row['resident_id'] . '&indigent=' . $row['indigent_number'] . '&val=' . base64_encode($row['indigent_number'] . '|' . $row['residentname'] . '|' . $row['date_recorded']) . '"" class="btn btn-primary ml-1">
                                                 <i class="fas fa-download" aria-hidden="true"></i>&nbsp Generate
                                               </a>
                                             </td>
@@ -228,7 +228,7 @@ if (!isset($_SESSION['role'])) {
                           <!-- disapproved -->
                           <div class="tab-pane fade" id="disapproved" role="tabpanel"
                             aria-labelledby="disapproved-cstm-tab">
-                            <table id="tblclearance2" class="table table-bordered table-striped table-hover">
+                            <table id="tblindigent2" class="table table-bordered table-striped table-hover">
                               <thead>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
@@ -249,7 +249,7 @@ if (!isset($_SESSION['role'])) {
                               <tbody>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     $checkboxId = 'cstm-chckbx-' . $row['pid'];
                                     echo '
@@ -268,7 +268,7 @@ if (!isset($_SESSION['role'])) {
                                     include "modal/edit.mod.php";
                                   }
                                 } else {
-                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
+                                  $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id where status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
@@ -304,7 +304,7 @@ if (!isset($_SESSION['role'])) {
                   <div class="card card-primary card-outline">
                     <div class="card-body table-responsive">
                       <form method="post">
-                        <table id="tblclearance" class="table table-bordered table-striped">
+                        <table id="tblindigent" class="table table-bordered table-striped">
                           <thead>
                             <tr>
                               <th class="align-middle user-select-none">Resident Name</th>
@@ -314,7 +314,7 @@ if (!isset($_SESSION['role'])) {
                           </thead>
                           <tbody>
                             <?php
-                            $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblclearance p left join tblresident r on r.id = p.residentid  where status = 'new'") or die('Error: ' . mysqli_error($con));
+                            $squery = mysqli_query($con, "SELECT *,CONCAT(r.lname, ', ' ,r.fname, ' ' ,r.mname) as residentname,p.id as pid FROM tblindigent p left join tblresident r on r.id = p.resident_id  where status = 'new'") or die('Error: ' . mysqli_error($con));
                             while ($row = mysqli_fetch_array($squery)) {
                               echo '
                                   <tr>
@@ -350,11 +350,11 @@ if (!isset($_SESSION['role'])) {
                     <div class="card-header">
                       <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#reqModal"><i
                           class="fa fa-user-plus" aria-hidden="true"></i>
-                        &nbsp; Request Clearance</button>
+                        &nbsp; Request Indigent</button>
                       <?php if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff")) { ?>
                         <button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#deleteModal"><i
                             class="fas fa-trash-alt" aria-hidden="true"></i>
-                          &nbsp; Delete Clearance</button>
+                          &nbsp; Delete Indigent</button>
                       <?php } ?>
                     </div>
                   </div>
@@ -385,7 +385,7 @@ if (!isset($_SESSION['role'])) {
                         <div class="tab-content" id="custom-tabs-four-tabContent">
                           <!-- new -->
                           <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-cstm-tab">
-                            <table id="tblclearance" class="table table-bordered table-striped">
+                            <table id="tblindigent" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
                                   <th class="align-middle user-select-none">Purpose</th>
@@ -393,7 +393,7 @@ if (!isset($_SESSION['role'])) {
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblclearance p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'new' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblindigent p left join tblresident r on r.id = p.resident_id where r.id = " . $_SESSION['userid'] . " and status = 'new' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
@@ -408,7 +408,7 @@ if (!isset($_SESSION['role'])) {
                           </div>
                           <!-- approved -->
                           <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-cstm-tab">
-                            <table id="tblclearance1" class="table table-bordered table-striped">
+                            <table id="tblindigent1" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
                                   <?php
@@ -423,7 +423,7 @@ if (!isset($_SESSION['role'])) {
                                     </th>
                                     <?php
                                   } ?>
-                                  <th class="align-middle user-select-none">Clearance #</th>
+                                  <th class="align-middle user-select-none">Indigent #</th>
                                   <th class="align-middle user-select-none">Findings</th>
                                   <th class="align-middle user-select-none">Purpose</th>
                                   <th class="align-middle user-select-none">OR Number</th>
@@ -432,16 +432,16 @@ if (!isset($_SESSION['role'])) {
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblclearance p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'approved' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblindigent p left join tblresident r on r.id = p.resident_id where r.id = " . $_SESSION['userid'] . " and status = 'approved' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
                                         <tr>
-                                            <td class="align-middle user-select-none">' . $row['clearanceNo'] . '</td>
+                                            <td class="align-middle user-select-none">' . $row['indigent_number'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['findings'] . '</td>
                                             <td class="align-middle user-select-none">' . $row['purpose'] . '</td>
-                                            <td class="align-middle user-select-none">' . $row['orNo'] . '</td>
-                                            <td class="align-middle user-select-none">₱ ' . number_format($row['samount'], 2) . '</td>
+                                            <td class="align-middle user-select-none">' . $row['or_number'] . '</td>
+                                            <td class="align-middle user-select-none">₱ ' . number_format($row['amount'], 2) . '</td>
                                         </tr>
                                       ';
                                   }
@@ -452,7 +452,7 @@ if (!isset($_SESSION['role'])) {
                           <!-- disapproved -->
                           <div class="tab-pane fade" id="disapproved" role="tabpanel"
                             aria-labelledby="disapproved-cstm-tab">
-                            <table id="tblclearance2" class="table table-bordered table-striped">
+                            <table id="tblindigent2" class="table table-bordered table-striped">
                               <thead>
                                 <?php
                                 if ((isset($_SESSION['role']) && $_SESSION['role'] == "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] == "staff") && !(isset($_SESSION['role']) && $_SESSION['role'] == "captain") || !(isset($_SESSION['role']) && $_SESSION['role'] == "resident")) {
@@ -471,7 +471,7 @@ if (!isset($_SESSION['role'])) {
                               </thead>
                               <tbody>
                                 <?php
-                                $squery = mysqli_query($con, "SELECT * FROM tblclearance p left join tblresident r on r.id = p.residentid where r.id = " . $_SESSION['userid'] . " and status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
+                                $squery = mysqli_query($con, "SELECT * FROM tblindigent p left join tblresident r on r.id = p.resident_id where r.id = " . $_SESSION['userid'] . " and status = 'disapproved' ") or die('Error: ' . mysqli_error($con));
                                 if (mysqli_num_rows($squery) > 0) {
                                   while ($row = mysqli_fetch_array($squery)) {
                                     echo '
@@ -516,7 +516,7 @@ include "../../include/footer.inc.php" ?>
     if ((isset($_SESSION['role']) && $_SESSION['role'] === "administrator") || (isset($_SESSION['role']) && $_SESSION['role'] === "staff")) {
       ?>
       $(function () {
-        $("#tblclearance").DataTable({
+        $("#tblindigent").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -531,8 +531,8 @@ include "../../include/footer.inc.php" ?>
             { "orderable": false, "targets": 0 }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance_wrapper .col-md-6:eq(0)')
-        $("#tblclearance1").DataTable({
+        }).buttons().container().appendTo('#tblindigent_wrapper .col-md-6:eq(0)')
+        $("#tblindigent1").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -547,8 +547,8 @@ include "../../include/footer.inc.php" ?>
             { "orderable": false, "targets": 0 }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance1_wrapper .col-md-6:eq(0)')
-        $("#tblclearance2").DataTable({
+        }).buttons().container().appendTo('#tblindigent1_wrapper .col-md-6:eq(0)')
+        $("#tblindigent2").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -563,13 +563,13 @@ include "../../include/footer.inc.php" ?>
             { "orderable": false, "targets": 0 }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance2_wrapper .col-md-6:eq(0)')
+        }).buttons().container().appendTo('#tblindigent2_wrapper .col-md-6:eq(0)')
       });
       <?php
     } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "captain")) {
       ?>
       $(document).ready(function () {
-        $("#tblclearance").DataTable({
+        $("#tblindigent").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -584,13 +584,13 @@ include "../../include/footer.inc.php" ?>
             { "orderable": false, "targets": [2] }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance_wrapper .col-md-6:eq(0)')
+        }).buttons().container().appendTo('#tblindigent_wrapper .col-md-6:eq(0)')
       });
       <?php
     } elseif ((isset($_SESSION['role']) && $_SESSION['role'] === "resident")) {
       ?>
       $(function () {
-        $("#tblclearance").DataTable({
+        $("#tblindigent").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -605,8 +605,8 @@ include "../../include/footer.inc.php" ?>
             { "orderable": true, "targets": [0] }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance_wrapper .col-md-6:eq(0)')
-        $("#tblclearance1").DataTable({
+        }).buttons().container().appendTo('#tblindigent_wrapper .col-md-6:eq(0)')
+        $("#tblindigent1").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -621,8 +621,8 @@ include "../../include/footer.inc.php" ?>
             { "orderable": true, "targets": [0, 4] }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance1_wrapper .col-md-6:eq(0)')
-        $("#tblclearance2").DataTable({
+        }).buttons().container().appendTo('#tblindigent1_wrapper .col-md-6:eq(0)')
+        $("#tblindigent2").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print"],
           "paging": true,
@@ -637,7 +637,7 @@ include "../../include/footer.inc.php" ?>
             { "orderable": true, "targets": [0, 1] }
           ],
           "aaSorting": []
-        }).buttons().container().appendTo('#tblclearance2_wrapper .col-md-6:eq(0)')
+        }).buttons().container().appendTo('#tblindigent2_wrapper .col-md-6:eq(0)')
       });
       <?php
     } ?>

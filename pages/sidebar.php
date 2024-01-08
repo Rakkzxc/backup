@@ -130,8 +130,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
 
           <li class="nav-header text-uppercase"><small>issuance</small></li>
 
-        <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'menu-open' : '') . '">
-          <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'active' : '') . '">
+        <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'menu-open' : '') . '">
+          <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'active' : '') . '">
             <i class="nav-icon fas fa-scroll"></i>
             <p>
               Certificates
@@ -156,6 +156,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
                 <a href="../lowincome/lowincome.php" class="nav-link ' . ($page == "lowincome.php" ? 'active' : '') . '">
                   <i class="fas fa-angle-right nav-icon"></i>
                   <p>Low Income</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../indigent/indigent.php" class="nav-link ' . ($page == "indigent.php" ? 'active' : '') . '">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Indigent</p>
                 </a>
               </li>
             </ul>
@@ -263,8 +269,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
         <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
 
-            <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'menu-open' : '') . '">
-              <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'active' : '') . '">
+            <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'menu-open' : '') . '">
+              <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'active' : '') . '">
                 <i class="nav-icon fas fa-scroll"></i>
                 <p>
                   Certificates
@@ -289,6 +295,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
                     <a href="../lowincome/lowincome.php" class="nav-link ' . ($page == "lowincome.php" ? 'active' : '') . '">
                       <i class="fas fa-angle-right nav-icon"></i>
                       <p>Low Income</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="../indigent/indigent.php" class="nav-link ' . ($page == "indigent.php" ? 'active' : '') . '">
+                      <i class="fas fa-angle-right nav-icon"></i>
+                      <p>Indigent</p>
                     </a>
                   </li>
                 </ul>
@@ -353,8 +365,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
               </a>
             </li>
   
-          <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'menu-open' : '') . '">
-            <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'active' : '') . '">
+          <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'menu-open' : '') . '">
+            <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'active' : '') . '">
               <i class="nav-icon fas fa-scroll"></i>
               <p>
                 Certificates
@@ -379,6 +391,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
                   <a href="../lowincome/lowincome.php" class="nav-link ' . ($page == "lowincome.php" ? 'active' : '') . '">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Low Income</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../indigent/indigent.php" class="nav-link ' . ($page == "indigent.php" ? 'active' : '') . '">
+                    <i class="fas fa-angle-right nav-icon"></i>
+                    <p>Indigent</p>
                   </a>
                 </li>
               </ul>
@@ -410,8 +428,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
         <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
 
-          <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'menu-open' : '') . '">
-            <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php") ? 'active' : '') . '">
+          <li class="nav-item ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'menu-open' : '') . '">
+            <a href="#" class="nav-link ' . (($page == "clearance.php" || $page == "permit.php" || $page == "lowincome.php" || $page == "indigent.php") ? 'active' : '') . '">
               <i class="nav-icon fas fa-scroll"></i>
               <p>
                 Certificates
@@ -436,6 +454,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'administrator') {
                   <a href="../lowincome/lowincome.php" class="nav-link ' . ($page == "lowincome.php" ? 'active' : '') . '">
                     <i class="fas fa-angle-right nav-icon"></i>
                     <p>Low Income</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../indigent/indigent.php" class="nav-link ' . ($page == "indigent.php" ? 'active' : '') . '">
+                    <i class="fas fa-angle-right nav-icon"></i>
+                    <p>Indigent</p>
                   </a>
                 </li>
               </ul>
